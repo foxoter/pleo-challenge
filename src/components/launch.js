@@ -13,6 +13,7 @@ import {
   SimpleGrid,
   Box,
   Text,
+  Tooltip,
   Spinner,
   Image,
   Link,
@@ -114,6 +115,14 @@ function Header({ launch }) {
 }
 
 function TimeAndLocation({ launch }) {
+  const toolTipProps = {
+    hasArrow: true,
+    shouldWrapChildren: true,
+    placement: 'top-start',
+    label: 
+      `Launch time in your local timezone: ${formatDateTime(launch.launch_date_local)}`,
+  };
+
   return (
     <SimpleGrid columns={[1, 1, 2]} borderWidth="1px" p="4" borderRadius="md">
       <Stat>
@@ -123,8 +132,10 @@ function TimeAndLocation({ launch }) {
             Launch Date
           </Box>
         </StatLabel>
-        <StatNumber fontSize={["md", "xl"]}>
-          {formatLocalTime(launch.launch_date_local)}
+        <StatNumber fontSize={["md", "xl"]} as='u'>
+          <Tooltip {...toolTipProps}>
+            {formatLocalTime(launch.launch_date_local)}
+          </Tooltip>
         </StatNumber>
         <StatHelpText>{timeAgo(launch.launch_date_utc)}</StatHelpText>
       </Stat>
