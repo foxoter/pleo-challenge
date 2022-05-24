@@ -1,0 +1,1 @@
+export const ISO8601_OFFSET_START_INDEX = 19;

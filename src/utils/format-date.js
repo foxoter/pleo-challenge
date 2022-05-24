@@ -1,3 +1,5 @@
+import { ISO8601_OFFSET_START_INDEX } from "../constants/formate-date";
+
 export function formatDate(timestamp) {
   return new Intl.DateTimeFormat("en-US", {
     weekday: "long",
@@ -17,4 +19,26 @@ export function formatDateTime(timestamp) {
     second: "numeric",
     timeZoneName: "short",
   }).format(new Date(timestamp));
+}
+
+export function formatLocalTime(timestamp) {
+  const offset = parseOffsetString(timestamp);
+  const values = timestamp.split(/[:T-]/).map(Number);
+  
+  const time = new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+  }).format(new Date(values[0], values[1] - 1, values[2], values[3], values[4], values[5]));
+  
+  return `${time} ${offset}`;
+}
+
+export function parseOffsetString(timestamp) {
+  const offset = timestamp.slice(ISO8601_OFFSET_START_INDEX);
+  const values = offset.split(/[-+:]/).map(Number);
+  return `GMT${offset[0]}${values[1]}${values[2] === 0 ? '' : `:${values[2]}`}`;
 }
