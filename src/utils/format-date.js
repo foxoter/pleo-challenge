@@ -22,7 +22,6 @@ export function formatDateTime(timestamp) {
 }
 
 export function formatLocalTime(timestamp) {
-  console.log(timestamp);
   const offset = parseOffsetString(timestamp);
   const values = timestamp.split(/[:T-]/).map(Number).slice(0,6);
   values[1] = values[1] - 1;
