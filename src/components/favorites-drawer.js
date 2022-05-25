@@ -4,13 +4,13 @@ import {
   Button,
   Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
   Flex,
 } from "@chakra-ui/core";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/core";
 
 
 export default function FavoritesDrawer({ children }) {
@@ -46,16 +46,27 @@ export default function FavoritesDrawer({ children }) {
           <DrawerHeader>Favorites</DrawerHeader>
 
           <DrawerBody>
-            <div style={{ border: '1px solid red', height: 200 }}>jhello</div>
-            <div style={{ border: '1px solid red', height: 200 }}>jhello</div>
-            <div style={{ border: '1px solid red', height: 200 }}>jhello</div>
-            <div style={{ border: '1px solid red', height: 200 }}>jhello</div>
-            <div style={{ border: '1px solid red', height: 200 }}>jhello</div>
-          </DrawerBody>
+            <Tabs>
+              <TabList>
+                <Tab>Launches</Tab>
+                <Tab>Launch Pads</Tab>
+              </TabList>
 
-          <DrawerFooter>
-            drawer footer
-          </DrawerFooter>
+              <TabPanels>
+                <TabPanel>
+                  <div style={{ border: '1px solid red', height: 200 }}>hello 1</div>
+                  <div style={{ border: '1px solid red', height: 200 }}>jhello</div>
+                  <div style={{ border: '1px solid red', height: 200 }}>jhello</div>
+                  <div style={{ border: '1px solid red', height: 200 }}>jhello</div>
+                  <div style={{ border: '1px solid red', height: 200 }}>jhello</div>
+                </TabPanel>
+                <TabPanel>
+                  <div style={{ border: '1px solid red', height: 200 }}>hello 2</div>
+                  <div style={{ border: '1px solid red', height: 200 }}>jhello</div>
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          </DrawerBody>
         </DrawerContent>
       </Drawer>
     </Flex>
