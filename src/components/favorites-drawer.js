@@ -9,6 +9,7 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
+  Flex,
 } from "@chakra-ui/core";
 
 
@@ -22,9 +23,15 @@ export default function FavoritesDrawer({ children }) {
   }
 
   return (
-    <>
-      <Button ref={btnRef} colorScheme='teal' onClick={onDrawerOpen}>
-        test
+    <Flex flexDirection='column'>
+      <Button
+        ref={btnRef}
+        colorScheme='teal'
+        onClick={onDrawerOpen}
+        roundedTop="0"
+        alignSelf={'flex-end'}
+      >
+        Favorites
       </Button>
       {children}
       <Drawer
@@ -34,7 +41,7 @@ export default function FavoritesDrawer({ children }) {
         finalFocusRef={btnRef}
       >
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent overflow='scroll'>
           <DrawerCloseButton />
           <DrawerHeader>Favorites</DrawerHeader>
 
@@ -51,6 +58,6 @@ export default function FavoritesDrawer({ children }) {
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
-    </>
+    </Flex>
   )
 }
