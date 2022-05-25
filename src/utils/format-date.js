@@ -22,9 +22,11 @@ export function formatDateTime(timestamp) {
 }
 
 export function formatLocalTime(timestamp) {
+  console.log(timestamp);
   const offset = parseOffsetString(timestamp);
-  const values = timestamp.split(/[:T-]/).map(Number);
-  
+  const values = timestamp.split(/[:T-]/).map(Number).slice(0,6);
+  values[1] = values[1] - 1;
+
   const time = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "long",
@@ -32,7 +34,7 @@ export function formatLocalTime(timestamp) {
     hour: "numeric",
     minute: "numeric",
     second: "numeric",
-  }).format(new Date(values[0], values[1] - 1, values[2], values[3], values[4], values[5]));
+  }).format(new Date(...values));
   
   return `${time} ${offset}`;
 }
