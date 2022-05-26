@@ -20,12 +20,11 @@ export default function FavoriteLaunchPads() {
 	return (
 		<Stack spacing={4} shouldWrapChildren>
 			{favLaunchPads.map((item) => (
-				// <FavouriteLaunch
-				// 	key={item}
-				// 	launchId={item}
-				// 	onRemove={() => onItemClick(item)}
-				// />
-				<FavoriteLaunchPad key={item} launchPadId={item} />
+				<FavoriteLaunchPad
+					key={item}
+					launchPadId={item}
+					onRemove={() => onItemClick(item)}
+				/>
 			))}
 		</Stack>
 	);
