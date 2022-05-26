@@ -51,6 +51,7 @@ export default function Launches() {
 
 export function LaunchItem({ launch }) {
   const [favLaunches, setFavLaunches] = useRecoilState(favLaunchesState);
+  const isItemInFavorites = favLaunches.includes(launch.flight_number);
 
   const onStarClick = () => {
     console.log('star click launches', launch.flight_number);
@@ -118,7 +119,7 @@ export function LaunchItem({ launch }) {
             flexGrow={1}
             justifyContent="flex-end"
           >
-            <StarButton onStarClick={onStarClick} />
+            <StarButton onStarClick={onStarClick} active={isItemInFavorites} />
           </Box>
         </Box>
 
