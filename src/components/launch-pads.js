@@ -50,8 +50,11 @@ function LaunchPadItem({ launchPad }) {
 	const isItemInFavorites = favLaunchPads.includes(launchPad.site_id);
 
 	const onStarClick = () => {
-		const launchPadsNew = pushOrDeleteItem([...favLaunchPads], launchPad.site_id);
-    setFavLaunchPads(launchPadsNew);
+		const launchPadsNew = pushOrDeleteItem(
+			[...favLaunchPads],
+			launchPad.site_id,
+		);
+		setFavLaunchPads(launchPadsNew);
 	};
 
 	return (
