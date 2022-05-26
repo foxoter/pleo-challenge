@@ -8,20 +8,23 @@ import Home from "./home";
 import LaunchPads from "./launch-pads";
 import LaunchPad from "./launch-pad";
 import FavoritesDrawer from "./favorites-drawer";
+import { RecoilRoot } from "recoil";
 
 export default function App() {
   return (
     <div>
-      <NavBar />
-      <FavoritesDrawer>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/launches" element={<Launches />} />
-          <Route path="/launches/:launchId" element={<Launch />} />
-          <Route path="/launch-pads" element={<LaunchPads />} />
-          <Route path="/launch-pads/:launchPadId" element={<LaunchPad />} />
-        </Routes>
-      </FavoritesDrawer>
+      <RecoilRoot>
+        <NavBar />
+        <FavoritesDrawer>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/launches" element={<Launches />} />
+            <Route path="/launches/:launchId" element={<Launch />} />
+            <Route path="/launch-pads" element={<LaunchPads />} />
+            <Route path="/launch-pads/:launchPadId" element={<LaunchPad />} />
+          </Routes>
+        </FavoritesDrawer>
+      </RecoilRoot>
     </div>
   );
 }

@@ -9,6 +9,9 @@ import Error from "./error";
 import Breadcrumbs from "./breadcrumbs";
 import LoadMoreButton from "./load-more-button";
 import StarButton from "./star-button";
+import { useRecoilState } from "recoil";
+import { favLaunchesState } from "../atoms";
+import { pushOrDeleteItem } from "../utils/general";
 
 const PAGE_SIZE = 12;
 
@@ -47,8 +50,12 @@ export default function Launches() {
 }
 
 export function LaunchItem({ launch }) {
-  const onStarClick = (e) => {
-    console.log('star click launches');
+  const [favLaunches, setFavLaunches] = useRecoilState(favLaunchesState);
+
+  const onStarClick = () => {
+    console.log('star click launches', launch.flight_number);
+    const launchesArr = pushOrDeleteItem([...favLaunches], launch.flight_number);
+    setFavLaunches(launchesArr);
   }
 
   return (

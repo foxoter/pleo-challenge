@@ -17,9 +17,12 @@ import {
   Tooltip
 } from "@chakra-ui/core";
 import { Star } from "react-feather";
+import { useRecoilState } from "recoil";
+import { favLaunchesState } from "../atoms";
 
 
 export default function FavoritesDrawer({ children }) {
+  const [favLaunches, setFavLaunches] = useRecoilState(favLaunchesState);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
@@ -60,6 +63,7 @@ export default function FavoritesDrawer({ children }) {
               </TabList>
               <TabPanels>
                 <TabPanel>
+                  <div>{favLaunches}</div>
                   <div style={{ border: '1px solid red', height: 200 }}>hello 1</div>
                   <div style={{ border: '1px solid red', height: 200 }}>jhello</div>
                   <div style={{ border: '1px solid red', height: 200 }}>jhello</div>
