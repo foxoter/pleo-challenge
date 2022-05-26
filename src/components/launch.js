@@ -65,6 +65,10 @@ export default function Launch() {
 }
 
 function Header({ launch }) {
+  const onStarClick = (e) => {
+    console.log('star click launch');
+  }
+
   return (
     <Flex
       bgImage={`url(${launch.links.flickr_images[0]})`}
@@ -111,7 +115,7 @@ function Header({ launch }) {
           </Badge>
         )}
         <Badge> 
-          <StarButton />
+          <StarButton onStarClick={onStarClick} />
         </Badge>
       </Stack>
     </Flex>

@@ -4,6 +4,7 @@ import { Star } from "react-feather";
 
 export default function StarButton({ onStarClick }) {
   const label = 'Add to favorites';
+
   return (
     <Button
       variant='ghost'

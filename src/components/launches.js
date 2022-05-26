@@ -47,8 +47,8 @@ export default function Launches() {
 }
 
 export function LaunchItem({ launch }) {
-  const starClick = (e) => {
-    console.log('star click');
+  const onStarClick = (e) => {
+    console.log('star click launches');
   }
 
   return (
@@ -111,7 +111,7 @@ export function LaunchItem({ launch }) {
             flexGrow={1}
             justifyContent="flex-end"
           >
-            <StarButton onStarClick={starClick} />
+            <StarButton onStarClick={onStarClick} />
           </Box>
         </Box>
 
