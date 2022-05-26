@@ -27,6 +27,9 @@ import { formatDateTime, formatLocalTime } from "../utils/format-date";
 import Error from "./error";
 import Breadcrumbs from "./breadcrumbs";
 import StarButton from "./star-button";
+import { useRecoilState } from "recoil";
+import { favLaunchesState } from "../atoms";
+import { pushOrDeleteItem } from "../utils/general";
 
 export default function Launch() {
   let { launchId } = useParams();
@@ -65,8 +68,13 @@ export default function Launch() {
 }
 
 function Header({ launch }) {
+  const [favLaunches, setFavLaunches] = useRecoilState(favLaunchesState);
+  const isItemInFavorites = favLaunches.includes(launch.flight_number);
+
   const onStarClick = (e) => {
-    console.log('star click launch');
+    console.log('star click launch', launch.flight_number);
+    const launchesNew = pushOrDeleteItem([...favLaunches], launch.flight_number);
+    setFavLaunches(launchesNew);
   }
 
   return (
@@ -115,7 +123,7 @@ function Header({ launch }) {
           </Badge>
         )}
         <Badge> 
-          <StarButton onStarClick={onStarClick} />
+          <StarButton onStarClick={onStarClick} active={isItemInFavorites} />
         </Badge>
       </Stack>
     </Flex>
