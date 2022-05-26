@@ -71,8 +71,7 @@ function Header({ launch }) {
   const [favLaunches, setFavLaunches] = useRecoilState(favLaunchesState);
   const isItemInFavorites = favLaunches.includes(launch.flight_number);
 
-  const onStarClick = (e) => {
-    console.log('star click launch', launch.flight_number);
+  const onStarClick = () => {
     const launchesNew = pushOrDeleteItem([...favLaunches], launch.flight_number);
     setFavLaunches(launchesNew);
   }

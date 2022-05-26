@@ -7,7 +7,7 @@ import { format as timeAgo } from 'timeago.js';
 import { formatDate } from '../utils/format-date';
 import DeleteButton from './delete-button';
 
-export default function FavouriteLaunch({ launchId, onRemove }) {
+export default function FavoriteLaunch({ launchId, onRemove }) {
 	const { data: launch, error } = useSpaceX(`/launches/${launchId}`);
 
 	if (error) return <Error />;

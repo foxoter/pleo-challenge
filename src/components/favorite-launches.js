@@ -3,9 +3,9 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 import { favLaunchesState } from '../atoms';
 import { pushOrDeleteItem } from '../utils/general';
-import FavouriteLaunch from './favorite-launch';
+import FavoriteLaunch from './favorite-launch';
 
-export default function FavouriveLaunches() {
+export default function FavoriteLaunches() {
 	const [favLaunches, setFavLaunches] = useRecoilState(favLaunchesState);
 
 	const onItemClick = (id) => {
@@ -20,7 +20,7 @@ export default function FavouriveLaunches() {
 	return (
 		<Stack spacing={4} shouldWrapChildren>
 			{favLaunches.map((item) => (
-				<FavouriteLaunch
+				<FavoriteLaunch
 					key={item}
 					launchId={item}
 					onRemove={() => onItemClick(item)}

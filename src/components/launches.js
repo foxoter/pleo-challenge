@@ -54,7 +54,6 @@ export function LaunchItem({ launch }) {
   const isItemInFavorites = favLaunches.includes(launch.flight_number);
 
   const onStarClick = () => {
-    console.log('star click launches', launch.flight_number);
     const launchesNew = pushOrDeleteItem([...favLaunches], launch.flight_number);
     setFavLaunches(launchesNew);
   }
