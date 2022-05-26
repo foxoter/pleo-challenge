@@ -5,16 +5,16 @@ import { Star } from "react-feather";
 export default function StarButton({ onStarClick }) {
   const label = 'Add to favorites';
   return (
-    <Tooltip label={label} placement="top" hasArrow>
-      <Button
-        variant='link'
-        size='sm'
-      >
+    <Button
+      variant='ghost'
+      size='xs'
+    >
+      <Tooltip label={label} placement="top" hasArrow>
         <Star
           size={20}
           onClick={onStarClick}
         />
-      </Button>
-    </Tooltip>
+      </Tooltip>
+    </Button>
   )
 }
