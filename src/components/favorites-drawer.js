@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import {
 	useDisclosure,
 	Button,
@@ -21,8 +22,10 @@ import FavoriteLaunches from './favorite-launches';
 import FavoriteLaunchPads from './favorite-launch-pads';
 
 export default function FavoritesDrawer({ children }) {
+	const location = useLocation();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const btnRef = React.useRef();
+	const activeTabIndex = location.pathname.includes('/launch-pads') ? 1 : 0;
 
 	const onDrawerOpen = () => {
 		onOpen();
@@ -57,7 +60,7 @@ export default function FavoritesDrawer({ children }) {
 					<DrawerCloseButton />
 					<DrawerHeader>Favorites</DrawerHeader>
 					<DrawerBody>
-						<Tabs>
+						<Tabs defaultIndex={activeTabIndex}>
 							<TabList>
 								<Tab>Launches</Tab>
 								<Tab>Launch Pads</Tab>
@@ -67,7 +70,7 @@ export default function FavoritesDrawer({ children }) {
 									<FavoriteLaunches />
 								</TabPanel>
 								<TabPanel>
-                  <FavoriteLaunchPads />
+									<FavoriteLaunchPads />
 								</TabPanel>
 							</TabPanels>
 						</Tabs>
