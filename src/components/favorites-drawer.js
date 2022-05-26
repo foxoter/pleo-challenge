@@ -38,6 +38,9 @@ export default function FavoritesDrawer({ children }) {
           onClick={onDrawerOpen}
           roundedTop="0"
           alignSelf={'flex-end'}
+          position="sticky"
+          top={0}
+          zIndex={2}
         >
           <Star />
         </Button>
