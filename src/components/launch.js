@@ -72,9 +72,12 @@ function Header({ launch }) {
   const isItemInFavorites = favLaunches.includes(launch.flight_number);
 
   const onStarClick = () => {
-    const launchesNew = pushOrDeleteItem([...favLaunches], launch.flight_number);
+    const launchesNew = pushOrDeleteItem(
+      [...favLaunches],
+      launch.flight_number,
+    );
     setFavLaunches(launchesNew);
-  }
+  };
 
   return (
     <Flex
@@ -121,7 +124,7 @@ function Header({ launch }) {
             Failed
           </Badge>
         )}
-        <Badge> 
+        <Badge>
           <StarButton onStarClick={onStarClick} active={isItemInFavorites} />
         </Badge>
       </Stack>
@@ -133,9 +136,10 @@ function TimeAndLocation({ launch }) {
   const toolTipProps = {
     hasArrow: true,
     shouldWrapChildren: true,
-    placement: 'top-start',
-    label: 
-      `Launch time in your local timezone: ${formatDateTime(launch.launch_date_local)}`,
+    placement: "top-start",
+    label: `Launch time in your local timezone: ${formatDateTime(
+      launch.launch_date_local,
+    )}`,
   };
 
   return (
@@ -147,7 +151,7 @@ function TimeAndLocation({ launch }) {
             Launch Date
           </Box>
         </StatLabel>
-        <StatNumber fontSize={["md", "xl"]} as='u'>
+        <StatNumber fontSize={["md", "xl"]} as="u">
           <Tooltip {...toolTipProps}>
             {formatLocalTime(launch.launch_date_local)}
           </Tooltip>

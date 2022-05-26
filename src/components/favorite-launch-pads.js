@@ -1,31 +1,31 @@
-import { Stack, Text } from '@chakra-ui/core';
-import React from 'react';
-import { useRecoilState } from 'recoil';
-import { favLaunchPadsState } from '../atoms';
-import { pushOrDeleteItem } from '../utils/general';
-import FavoriteLaunchPad from './favorite-launch-pad';
+import { Stack, Text } from "@chakra-ui/core";
+import React from "react";
+import { useRecoilState } from "recoil";
+import { favLaunchPadsState } from "../atoms";
+import { pushOrDeleteItem } from "../utils/general";
+import FavoriteLaunchPad from "./favorite-launch-pad";
 
 export default function FavoriteLaunchPads() {
-	const [favLaunchPads, setFavLaunchPads] = useRecoilState(favLaunchPadsState);
+  const [favLaunchPads, setFavLaunchPads] = useRecoilState(favLaunchPadsState);
 
-	const onItemClick = (id) => {
-		const favoritesNew = pushOrDeleteItem([...favLaunchPads], id);
-		setFavLaunchPads(favoritesNew);
-	};
+  const onItemClick = (id) => {
+    const favoritesNew = pushOrDeleteItem([...favLaunchPads], id);
+    setFavLaunchPads(favoritesNew);
+  };
 
-	if (favLaunchPads.length === 0) {
-		return <Text>You have no favorite launch pads yet</Text>;
-	}
+  if (favLaunchPads.length === 0) {
+    return <Text>You have no favorite launch pads yet</Text>;
+  }
 
-	return (
-		<Stack spacing={4} shouldWrapChildren>
-			{favLaunchPads.map((item) => (
-				<FavoriteLaunchPad
-					key={item}
-					launchPadId={item}
-					onRemove={() => onItemClick(item)}
-				/>
-			))}
-		</Stack>
-	);
+  return (
+    <Stack spacing={4} shouldWrapChildren>
+      {favLaunchPads.map((item) => (
+        <FavoriteLaunchPad
+          key={item}
+          launchPadId={item}
+          onRemove={() => onItemClick(item)}
+        />
+      ))}
+    </Stack>
+  );
 }

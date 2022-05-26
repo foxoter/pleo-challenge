@@ -22,7 +22,7 @@ export default function Launches() {
       limit: PAGE_SIZE,
       order: "desc",
       sort: "launch_date_utc",
-    }
+    },
   );
 
   return (
@@ -54,9 +54,12 @@ export function LaunchItem({ launch }) {
   const isItemInFavorites = favLaunches.includes(launch.flight_number);
 
   const onStarClick = () => {
-    const launchesNew = pushOrDeleteItem([...favLaunches], launch.flight_number);
+    const launchesNew = pushOrDeleteItem(
+      [...favLaunches],
+      launch.flight_number,
+    );
     setFavLaunches(launchesNew);
-  }
+  };
 
   return (
     <Box
@@ -66,9 +69,7 @@ export function LaunchItem({ launch }) {
       overflow="hidden"
       position="relative"
     >
-      <Link
-        to={`/launches/${launch.flight_number.toString()}`}
-      >
+      <Link to={`/launches/${launch.flight_number.toString()}`}>
         <Image
           src={
             launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
@@ -113,11 +114,7 @@ export function LaunchItem({ launch }) {
           >
             {launch.rocket.rocket_name} &bull; {launch.launch_site.site_name}
           </Box>
-          <Box
-            d="flex"
-            flexGrow={1}
-            justifyContent="flex-end"
-          >
+          <Box d="flex" flexGrow={1} justifyContent="flex-end">
             <StarButton onStarClick={onStarClick} active={isItemInFavorites} />
           </Box>
         </Box>

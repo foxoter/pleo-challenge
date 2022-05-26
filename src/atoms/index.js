@@ -1,16 +1,16 @@
-import { atom } from 'recoil';
-import { recoilPersist } from 'recoil-persist';
+import { atom } from "recoil";
+import { recoilPersist } from "recoil-persist";
 
 const { persistAtom } = recoilPersist();
 
 export const favLaunchesState = atom({
-	key: 'favLaunchesState',
-	default: [],
-	effects_UNSTABLE: [persistAtom],
+  key: "favLaunchesState",
+  default: [],
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const favLaunchPadsState = atom({
-	key: 'favLaunchPadsState',
-	default: [],
-	effects_UNSTABLE: [persistAtom],
+  key: "favLaunchPadsState",
+  default: [],
+  effects_UNSTABLE: [persistAtom],
 });
