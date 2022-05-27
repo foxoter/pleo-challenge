@@ -7,3 +7,9 @@ export function pushOrDeleteItem(array, item) {
   array.splice(itemIndex, 1);
   return array;
 }
+
+export function removeItem(array, item) {
+  const itemIndex = array.indexOf(item);
+  array.splice(itemIndex, 1);
+  return array;
+}

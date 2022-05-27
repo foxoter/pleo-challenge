@@ -66,7 +66,7 @@ export default function Launch() {
 }
 
 function Header({ launch }) {
-  const [isItemInFavorites, addOrRemoveLaunch] = useFavoriteLaunches(
+  const { isItemInFavorites, addOrRemoveLaunch } = useFavoriteLaunches(
     launch.flight_number,
   );
 

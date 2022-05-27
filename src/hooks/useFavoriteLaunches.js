@@ -1,8 +1,8 @@
 import { useRecoilState } from "recoil";
 import { favLaunchesState } from "../atoms";
-import { pushOrDeleteItem } from "../utils/general";
+import { pushOrDeleteItem, removeItem } from "../utils/general";
 
-export function useFavoriteLaunches(launchId) {
+export function useFavoriteLaunches(launchId = 0) {
   const [favLaunches, setFavLaunches] = useRecoilState(favLaunchesState);
   const isItemInFavorites = favLaunches.includes(launchId);
 
@@ -11,5 +11,10 @@ export function useFavoriteLaunches(launchId) {
     setFavLaunches(launchesNew);
   };
 
-  return [isItemInFavorites, addOrRemoveLaunch];
+  const removeLaunch = (id) => {
+    const launchesNew = removeItem([...favLaunches], id);
+    setFavLaunches(launchesNew);
+  }
+
+  return { favLaunches, isItemInFavorites, addOrRemoveLaunch, removeLaunch };
 }
