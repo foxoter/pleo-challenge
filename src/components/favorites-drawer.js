@@ -27,18 +27,13 @@ export default function FavoritesDrawer({ children }) {
   const btnRef = React.useRef();
   const activeTabIndex = location.pathname.includes("/launch-pads") ? 1 : 0;
 
-  const onDrawerOpen = () => {
-    onOpen();
-    console.log("opened");
-  };
-
   return (
     <Flex flexDirection="column">
       <Tooltip label="See favorites" hasArrow>
         <Button
           ref={btnRef}
           colorScheme="teal"
-          onClick={onDrawerOpen}
+          onClick={onOpen}
           roundedTop="0"
           alignSelf={"flex-end"}
           position="sticky"

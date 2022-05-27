@@ -27,28 +27,26 @@ export default function FavoriteLaunchPad({ launchPadId, onRemove }) {
     >
       <Link to={`/launch-pads/${launchPad.site_id}`}>
         <Box p="2">
-          <Box>
-            {launchPad.status === "active" ? (
-              <Badge px="2" variant="solid" variantColor="green">
-                Active
-              </Badge>
-            ) : (
-              <Badge px="2" variant="solid" variantColor="red">
-                Retired
-              </Badge>
-            )}
-            <Box
-              color="gray.500"
-              fontWeight="semibold"
-              letterSpacing="wide"
-              fontSize="xs"
-              textTransform="uppercase"
-              mt="1"
-            >
-              {launchPad.attempted_launches} attempted &bull;{" "}
-              {launchPad.successful_launches} succeeded
-            </Box>
-          </Box>
+          {launchPad.status === "active" ? (
+            <Badge px="2" variant="solid" variantColor="green">
+              Active
+            </Badge>
+          ) : (
+            <Badge px="2" variant="solid" variantColor="red">
+              Retired
+            </Badge>
+          )}
+          <Text
+            color="gray.500"
+            fontWeight="semibold"
+            letterSpacing="wide"
+            fontSize="xs"
+            textTransform="uppercase"
+            mt="1"
+          >
+            {launchPad.attempted_launches} attempted &bull;{" "}
+            {launchPad.successful_launches} succeeded
+          </Text>
           <Box
             mt="1"
             fontWeight="semibold"

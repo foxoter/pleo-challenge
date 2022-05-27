@@ -7,9 +7,9 @@ export default function StarButton({ onStarClick, active }) {
   const color = active ? "gold" : "grey";
 
   return (
-    <Button variant="ghost" size="xs">
+    <Button variant="ghost" size="xs" onClick={onStarClick}>
       <Tooltip label={label} placement="top" hasArrow>
-        <Star size={20} onClick={onStarClick} stroke={color} fill={color} />
+        <Star size={20} stroke={color} fill={color} />
       </Tooltip>
     </Button>
   );

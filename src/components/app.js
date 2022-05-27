@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { Flex, Text } from "@chakra-ui/core";
+import { RecoilRoot } from "recoil";
 
 import Launches from "./launches";
 import Launch from "./launch";
@@ -8,7 +9,6 @@ import Home from "./home";
 import LaunchPads from "./launch-pads";
 import LaunchPad from "./launch-pad";
 import FavoritesDrawer from "./favorites-drawer";
-import { RecoilRoot } from "recoil";
 
 export default function App() {
   return (
