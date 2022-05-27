@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Button, Flex, Radio, RadioGroup, SimpleGrid, Text } from "@chakra-ui/core";
+import {
+  Button,
+  Flex,
+  Radio,
+  RadioGroup,
+  SimpleGrid,
+  Text,
+} from "@chakra-ui/core";
 
 import { useSpaceXPaginated } from "../utils/use-space-x";
 import Breadcrumbs from "./breadcrumbs";
@@ -12,7 +19,9 @@ import { SORT_BY_KEYS } from "../constants/rockets";
 const PAGE_SIZE = 12;
 
 export default function Rockets() {
+  const [sortOrder, setSortOrder] = useState("asc");
   const [sortBy, setSortBy] = useState(SORT_BY_KEYS.date);
+
   const { data, error, isValidating, setSize, size } = useSpaceXPaginated(
     "/rockets",
     {
@@ -21,18 +30,20 @@ export default function Rockets() {
       sort: "launch_date_utc",
     },
   );
-  const rockets = data && sortRocketsData([...data.flat()], sortBy);
-  console.log(rockets);
+  const rockets = data && sortRocketsData([...data.flat()], sortBy, sortOrder);
 
   return (
     <div>
       <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Rockets" }]} />
-      <Flex alignItems="center">
+      <Flex
+        alignItems={["flex-start", "center"]}
+        flexDirection={["column", "row"]}
+        m={["2", "6"]}
+      >
         <RadioGroup
           onChange={(e) => setSortBy(e.target.value)}
           value={sortBy}
           isInline
-          m="6"
         >
           <Text>Sort by:</Text>
           <Radio value={SORT_BY_KEYS.date}>First launch</Radio>
@@ -40,7 +51,13 @@ export default function Rockets() {
           <Radio value={SORT_BY_KEYS.height}>Height</Radio>
           <Radio value={SORT_BY_KEYS.mass}>Mass</Radio>
         </RadioGroup>
-        <Button>Reverse</Button>
+        <Button
+          mt={["4", "0"]}
+          ml={["0", "4"]}
+          onClick={() => setSortOrder(sortOrder === "asc" ? "dsc" : "asc")}
+        >
+          Reverse sort
+        </Button>
       </Flex>
       <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
         {error && <Error />}
