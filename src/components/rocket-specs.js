@@ -50,7 +50,7 @@ export default function RocketSpecs({ rocket }) {
           </StatNumber>
         </Stat>
       </Grid>
-      <Text color="gray.500" fontWeight="bold">
+      <Text color="gray.500" fontWeight="semibold">
         About
       </Text>
       <Text mb="2">{rocket.description}</Text>

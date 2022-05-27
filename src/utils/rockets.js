@@ -18,7 +18,7 @@ export function sortRocketsData(array, sortBy, sortOrder) {
         : array.sort((a, b) => b.mass.kg - a.mass.kg);
       return array;
     case SORT_BY_KEYS.date:
-      return sortOrder === "asc" ? array : array.reverse();;
+      return sortOrder === "asc" ? array : array.reverse();
     default:
       return array;
   }

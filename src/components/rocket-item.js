@@ -18,7 +18,6 @@ import RocketItemHighlight from "./rocket-item-highlight";
 
 export default function RocketItem({ rocket, higlight }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  console.log(higlight);
 
   return (
     <>

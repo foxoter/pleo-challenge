@@ -45,7 +45,7 @@ export default function Rockets() {
           value={sortBy}
           isInline
         >
-          <Text>Sort by:</Text>
+          <Text fontWeight="semibold">Sort by:</Text>
           <Radio value={SORT_BY_KEYS.date}>First launch</Radio>
           <Radio value={SORT_BY_KEYS.cost}>Cost per launch</Radio>
           <Radio value={SORT_BY_KEYS.height}>Height</Radio>
