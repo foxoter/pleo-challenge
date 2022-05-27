@@ -9,9 +9,7 @@ import Error from "./error";
 import Breadcrumbs from "./breadcrumbs";
 import LoadMoreButton from "./load-more-button";
 import StarButton from "./star-button";
-import { useRecoilState } from "recoil";
-import { favLaunchesState } from "../atoms";
-import { pushOrDeleteItem } from "../utils/general";
+import { useFavoriteLaunches } from "../hooks/useFavoriteLaunches";
 
 const PAGE_SIZE = 12;
 
@@ -50,16 +48,9 @@ export default function Launches() {
 }
 
 export function LaunchItem({ launch }) {
-  const [favLaunches, setFavLaunches] = useRecoilState(favLaunchesState);
-  const isItemInFavorites = favLaunches.includes(launch.flight_number);
-
-  const onStarClick = () => {
-    const launchesNew = pushOrDeleteItem(
-      [...favLaunches],
-      launch.flight_number,
-    );
-    setFavLaunches(launchesNew);
-  };
+  const [isItemInFavorites, addOrRemoveLaunch] = useFavoriteLaunches(
+    launch.flight_number,
+  );
 
   return (
     <Box
@@ -115,7 +106,10 @@ export function LaunchItem({ launch }) {
             {launch.rocket.rocket_name} &bull; {launch.launch_site.site_name}
           </Box>
           <Box d="flex" flexGrow={1} justifyContent="flex-end">
-            <StarButton onStarClick={onStarClick} active={isItemInFavorites} />
+            <StarButton
+              onStarClick={addOrRemoveLaunch}
+              active={isItemInFavorites}
+            />
           </Box>
         </Box>
 
