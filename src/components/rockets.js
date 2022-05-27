@@ -65,12 +65,16 @@ export default function Rockets() {
           rockets
             .flat()
             .map((rocket) => (
-              <RocketItem rocket={rocket} key={rocket.rocket_id} />
+              <RocketItem
+                rocket={rocket}
+                key={rocket.rocket_id}
+                higlight={sortBy}
+              />
             ))}
       </SimpleGrid>
       <LoadMoreButton
         loadMore={() => setSize(size + 1)}
-        data={rockets}
+        data={data}
         pageSize={PAGE_SIZE}
         isLoadingMore={isValidating}
       />

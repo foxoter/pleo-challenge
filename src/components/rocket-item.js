@@ -3,7 +3,6 @@ import {
   useDisclosure,
   Badge,
   Box,
-  Flex,
   Image,
   Text,
   Modal,
@@ -12,13 +11,14 @@ import {
   ModalHeader,
   ModalBody,
   ModalCloseButton,
+  Tooltip,
 } from "@chakra-ui/core";
-import { format as timeAgo } from "timeago.js";
-import { formatDate } from "../utils/format-date";
 import RocketSpecs from "./rocket-specs";
+import RocketItemHighlight from "./rocket-item-highlight";
 
-export default function RocketItem({ rocket }) {
+export default function RocketItem({ rocket, higlight }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  console.log(higlight);
 
   return (
     <>
@@ -39,16 +39,18 @@ export default function RocketItem({ rocket }) {
         overflow="hidden"
         position="relative"
       >
-        <Image
-          src={rocket.flickr_images[0]}
-          alt={`${rocket.rocket_name} rocket`}
-          height={["200px", null, "300px"]}
-          width="100%"
-          objectFit="cover"
-          objectPosition="bottom"
-          cursor="pointer"
-          onClick={onOpen}
-        />
+        <Tooltip placement="bottom" label="View specs" hasArrow>
+          <Image
+            src={rocket.flickr_images[0]}
+            alt={`${rocket.rocket_name} rocket`}
+            height={["200px", null, "300px"]}
+            width="100%"
+            objectFit="cover"
+            objectPosition="bottom"
+            cursor="pointer"
+            onClick={onOpen}
+          />
+        </Tooltip>
         <Box p="6">
           <Box d="flex" alignItems="center">
             {rocket.active ? (
@@ -80,12 +82,9 @@ export default function RocketItem({ rocket }) {
           >
             {rocket.rocket_name}
           </Box>
-          <Flex>
-            <Text fontSize="sm">{formatDate(rocket.first_flight)}</Text>
-            <Text color="gray.500" ml="2" fontSize="sm">
-              {timeAgo(rocket.first_flight)}
-            </Text>
-          </Flex>
+          <Box mt="1">
+            <RocketItemHighlight rocket={rocket} higlight={higlight} />
+          </Box>
         </Box>
       </Box>
     </>
