@@ -59,6 +59,7 @@ export function LaunchItem({ launch }) {
       rounded="lg"
       overflow="hidden"
       position="relative"
+      data-cy="launch-item"
     >
       <Link to={`/launches/${launch.flight_number.toString()}`}>
         <Image

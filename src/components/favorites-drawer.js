@@ -39,6 +39,7 @@ export default function FavoritesDrawer({ children }) {
           position="sticky"
           top={0}
           zIndex={2}
+          data-cy="fav-drawer-btn"
         >
           <Star />
         </Button>
@@ -54,7 +55,7 @@ export default function FavoritesDrawer({ children }) {
         <DrawerContent overflow="scroll">
           <DrawerCloseButton />
           <DrawerHeader>Favorites</DrawerHeader>
-          <DrawerBody>
+          <DrawerBody data-cy="fav-drawer">
             <Tabs defaultIndex={activeTabIndex}>
               <TabList>
                 <Tab>Launches</Tab>

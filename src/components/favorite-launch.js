@@ -26,6 +26,7 @@ export default function FavoriteLaunch({ launchId, onRemove }) {
       rounded="lg"
       overflow="hidden"
       position="relative"
+      data-cy="fav-launch"
     >
       <Link to={`/launches/${launchId.toString()}`}>
         <Flex
