@@ -6,6 +6,8 @@ import Error from "./error";
 import Breadcrumbs from "./breadcrumbs";
 import LoadMoreButton from "./load-more-button";
 import { useSpaceXPaginated } from "../utils/use-space-x";
+import StarButton from "./star-button";
+import { useFavoriteLaunchPads } from "../hooks/useFavoriteLaunchPads";
 
 const PAGE_SIZE = 12;
 
@@ -14,7 +16,7 @@ export default function LaunchPads() {
     "/launchpads",
     {
       limit: PAGE_SIZE,
-    }
+    },
   );
 
   return (
@@ -42,10 +44,12 @@ export default function LaunchPads() {
 }
 
 function LaunchPadItem({ launchPad }) {
+  const { isItemInFavorites, addOrRemoveLaunchPad } = useFavoriteLaunchPads(
+    launchPad.site_id,
+  );
+
   return (
     <Box
-      as={Link}
-      to={`/launch-pads/${launchPad.site_id}`}
       boxShadow="md"
       borderWidth="1px"
       rounded="lg"
@@ -53,7 +57,7 @@ function LaunchPadItem({ launchPad }) {
       position="relative"
     >
       <Box p="6">
-        <Box d="flex" alignItems="baseline">
+        <Box d="flex" alignItems="center">
           {launchPad.status === "active" ? (
             <Badge px="2" variant="solid" variantColor="green">
               Active
@@ -74,20 +78,28 @@ function LaunchPadItem({ launchPad }) {
             {launchPad.attempted_launches} attempted &bull;{" "}
             {launchPad.successful_launches} succeeded
           </Box>
+          <Box d="flex" flexGrow={1} justifyContent="flex-end">
+            <StarButton
+              onStarClick={addOrRemoveLaunchPad}
+              active={isItemInFavorites}
+            />
+          </Box>
         </Box>
 
-        <Box
-          mt="1"
-          fontWeight="semibold"
-          as="h4"
-          lineHeight="tight"
-          isTruncated
-        >
-          {launchPad.name}
-        </Box>
-        <Text color="gray.500" fontSize="sm">
-          {launchPad.vehicles_launched.join(", ")}
-        </Text>
+        <Link to={`/launch-pads/${launchPad.site_id}`}>
+          <Box
+            mt="1"
+            fontWeight="semibold"
+            as="h4"
+            lineHeight="tight"
+            isTruncated
+          >
+            {launchPad.name}
+          </Box>
+          <Text color="gray.500" fontSize="sm">
+            {launchPad.vehicles_launched.join(", ")}
+          </Text>
+        </Link>
       </Box>
     </Box>
   );

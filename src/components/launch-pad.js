@@ -21,6 +21,8 @@ import { useSpaceX } from "../utils/use-space-x";
 import Error from "./error";
 import Breadcrumbs from "./breadcrumbs";
 import { LaunchItem } from "./launches";
+import StarButton from "./star-button";
+import { useFavoriteLaunchPads } from "../hooks/useFavoriteLaunchPads";
 
 export default function LaunchPad() {
   let { launchPadId } = useParams();
@@ -68,6 +70,10 @@ const randomColor = (start = 200, end = 250) =>
   `hsl(${start + end * Math.random()}, 80%, 90%)`;
 
 function Header({ launchPad }) {
+  const { isItemInFavorites, addOrRemoveLaunchPad } = useFavoriteLaunchPads(
+    launchPad.site_id,
+  );
+
   return (
     <Flex
       background={`linear-gradient(${randomColor()}, ${randomColor()})`}
@@ -105,6 +111,12 @@ function Header({ launchPad }) {
             Retired
           </Badge>
         )}
+        <Badge>
+          <StarButton
+            onStarClick={addOrRemoveLaunchPad}
+            active={isItemInFavorites}
+          />
+        </Badge>
       </Stack>
     </Flex>
   );

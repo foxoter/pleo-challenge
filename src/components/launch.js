@@ -26,6 +26,8 @@ import { useSpaceX } from "../utils/use-space-x";
 import { formatDateTime, formatLocalTime } from "../utils/format-date";
 import Error from "./error";
 import Breadcrumbs from "./breadcrumbs";
+import StarButton from "./star-button";
+import { useFavoriteLaunches } from "../hooks/useFavoriteLaunches";
 
 export default function Launch() {
   let { launchId } = useParams();
@@ -64,6 +66,10 @@ export default function Launch() {
 }
 
 function Header({ launch }) {
+  const { isItemInFavorites, addOrRemoveLaunch } = useFavoriteLaunches(
+    launch.flight_number,
+  );
+
   return (
     <Flex
       bgImage={`url(${launch.links.flickr_images[0]})`}
@@ -109,6 +115,12 @@ function Header({ launch }) {
             Failed
           </Badge>
         )}
+        <Badge>
+          <StarButton
+            onStarClick={addOrRemoveLaunch}
+            active={isItemInFavorites}
+          />
+        </Badge>
       </Stack>
     </Flex>
   );
@@ -118,9 +130,10 @@ function TimeAndLocation({ launch }) {
   const toolTipProps = {
     hasArrow: true,
     shouldWrapChildren: true,
-    placement: 'top-start',
-    label: 
-      `Launch time in your local timezone: ${formatDateTime(launch.launch_date_local)}`,
+    placement: "top-start",
+    label: `Launch time in your local timezone: ${formatDateTime(
+      launch.launch_date_local,
+    )}`,
   };
 
   return (
@@ -132,7 +145,7 @@ function TimeAndLocation({ launch }) {
             Launch Date
           </Box>
         </StatLabel>
-        <StatNumber fontSize={["md", "xl"]} as='u'>
+        <StatNumber fontSize={["md", "xl"]} as="u">
           <Tooltip {...toolTipProps}>
             {formatLocalTime(launch.launch_date_local)}
           </Tooltip>

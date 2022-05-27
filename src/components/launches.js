@@ -8,6 +8,8 @@ import { formatDate } from "../utils/format-date";
 import Error from "./error";
 import Breadcrumbs from "./breadcrumbs";
 import LoadMoreButton from "./load-more-button";
+import StarButton from "./star-button";
+import { useFavoriteLaunches } from "../hooks/useFavoriteLaunches";
 
 const PAGE_SIZE = 12;
 
@@ -18,9 +20,9 @@ export default function Launches() {
       limit: PAGE_SIZE,
       order: "desc",
       sort: "launch_date_utc",
-    }
+    },
   );
-  console.log(data, error);
+
   return (
     <div>
       <Breadcrumbs
@@ -46,27 +48,31 @@ export default function Launches() {
 }
 
 export function LaunchItem({ launch }) {
+  const { isItemInFavorites, addOrRemoveLaunch } = useFavoriteLaunches(
+    launch.flight_number,
+  );
+
   return (
     <Box
-      as={Link}
-      to={`/launches/${launch.flight_number.toString()}`}
       boxShadow="md"
       borderWidth="1px"
       rounded="lg"
       overflow="hidden"
       position="relative"
     >
-      <Image
-        src={
-          launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
-          launch.links.mission_patch_small
-        }
-        alt={`${launch.mission_name} launch`}
-        height={["200px", null, "300px"]}
-        width="100%"
-        objectFit="cover"
-        objectPosition="bottom"
-      />
+      <Link to={`/launches/${launch.flight_number.toString()}`}>
+        <Image
+          src={
+            launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
+            launch.links.mission_patch_small
+          }
+          alt={`${launch.mission_name} launch`}
+          height={["200px", null, "300px"]}
+          width="100%"
+          objectFit="cover"
+          objectPosition="bottom"
+        />
+      </Link>
 
       <Image
         position="absolute"
@@ -79,7 +85,7 @@ export function LaunchItem({ launch }) {
       />
 
       <Box p="6">
-        <Box d="flex" alignItems="baseline">
+        <Box d="flex" alignItems="center">
           {launch.launch_success ? (
             <Badge px="2" variant="solid" variantColor="green">
               Successful
@@ -98,6 +104,12 @@ export function LaunchItem({ launch }) {
             ml="2"
           >
             {launch.rocket.rocket_name} &bull; {launch.launch_site.site_name}
+          </Box>
+          <Box d="flex" flexGrow={1} justifyContent="flex-end">
+            <StarButton
+              onStarClick={addOrRemoveLaunch}
+              active={isItemInFavorites}
+            />
           </Box>
         </Box>
 
