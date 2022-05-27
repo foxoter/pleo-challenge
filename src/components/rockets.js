@@ -18,6 +18,8 @@ export default function Rockets() {
       sort: "launch_date_utc",
     },
   );
+  // const rockets = [...data];
+  // console.log(rockets);
 
   return (
     <div>

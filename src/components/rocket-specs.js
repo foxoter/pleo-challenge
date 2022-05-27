@@ -1,5 +1,6 @@
 import React from "react";
 import { Grid, Stat, Text, StatLabel, StatNumber, Link } from "@chakra-ui/core";
+import { formatLength, formatPrice, formatWeight } from "../utils/format-number";
 
 export default function RocketSpecs({ rocket }) {
   return (
@@ -12,15 +13,15 @@ export default function RocketSpecs({ rocket }) {
       >
         <Stat>
           <StatLabel>Cost per launch</StatLabel>
-          <StatNumber>${rocket.cost_per_launch}</StatNumber>
+          <StatNumber>{formatPrice(rocket.cost_per_launch)}</StatNumber>
         </Stat>
         <Stat>
           <StatLabel>Height</StatLabel>
-          <StatNumber>{rocket.height.meters} m</StatNumber>
+          <StatNumber>{formatLength(rocket.height.meters)}</StatNumber>
         </Stat>
         <Stat>
           <StatLabel>Mass</StatLabel>
-          <StatNumber>{rocket.mass.kg} kg</StatNumber>
+          <StatNumber>{formatWeight(rocket.mass.kg)}</StatNumber>
         </Stat>
         <Stat>
           <StatLabel>Landing legs</StatLabel>
