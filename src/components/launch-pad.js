@@ -22,9 +22,7 @@ import Error from "./error";
 import Breadcrumbs from "./breadcrumbs";
 import { LaunchItem } from "./launches";
 import StarButton from "./star-button";
-import { useRecoilState } from "recoil";
-import { favLaunchPadsState } from "../atoms";
-import { pushOrDeleteItem } from "../utils/general";
+import { useFavoriteLaunchPads } from "../hooks/useFavoriteLaunchPads";
 
 export default function LaunchPad() {
   let { launchPadId } = useParams();
@@ -72,16 +70,9 @@ const randomColor = (start = 200, end = 250) =>
   `hsl(${start + end * Math.random()}, 80%, 90%)`;
 
 function Header({ launchPad }) {
-  const [favLaunchPads, setFavLaunchPads] = useRecoilState(favLaunchPadsState);
-  const isItemInFavorites = favLaunchPads.includes(launchPad.site_id);
-
-  const onStarClick = (e) => {
-    const launchPadsNew = pushOrDeleteItem(
-      [...favLaunchPads],
-      launchPad.site_id,
-    );
-    setFavLaunchPads(launchPadsNew);
-  };
+  const { isItemInFavorites, addOrRemoveLaunchPad } = useFavoriteLaunchPads(
+    launchPad.site_id,
+  );
 
   return (
     <Flex
@@ -121,7 +112,10 @@ function Header({ launchPad }) {
           </Badge>
         )}
         <Badge>
-          <StarButton onStarClick={onStarClick} active={isItemInFavorites} />
+          <StarButton
+            onStarClick={addOrRemoveLaunchPad}
+            active={isItemInFavorites}
+          />
         </Badge>
       </Stack>
     </Flex>

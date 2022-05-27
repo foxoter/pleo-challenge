@@ -1,17 +1,10 @@
 import { Stack, Text } from "@chakra-ui/core";
 import React from "react";
-import { useRecoilState } from "recoil";
-import { favLaunchPadsState } from "../atoms";
-import { pushOrDeleteItem } from "../utils/general";
+import { useFavoriteLaunchPads } from "../hooks/useFavoriteLaunchPads";
 import FavoriteLaunchPad from "./favorite-launch-pad";
 
 export default function FavoriteLaunchPads() {
-  const [favLaunchPads, setFavLaunchPads] = useRecoilState(favLaunchPadsState);
-
-  const onItemClick = (id) => {
-    const favoritesNew = pushOrDeleteItem([...favLaunchPads], id);
-    setFavLaunchPads(favoritesNew);
-  };
+  const { favLaunchPads, removeLaunchPad } = useFavoriteLaunchPads();
 
   if (favLaunchPads.length === 0) {
     return <Text>You have no favorite launch pads yet</Text>;
@@ -23,7 +16,7 @@ export default function FavoriteLaunchPads() {
         <FavoriteLaunchPad
           key={item}
           launchPadId={item}
-          onRemove={() => onItemClick(item)}
+          onRemove={() => removeLaunchPad(item)}
         />
       ))}
     </Stack>

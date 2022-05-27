@@ -7,9 +7,7 @@ import Breadcrumbs from "./breadcrumbs";
 import LoadMoreButton from "./load-more-button";
 import { useSpaceXPaginated } from "../utils/use-space-x";
 import StarButton from "./star-button";
-import { useRecoilState } from "recoil";
-import { favLaunchPadsState } from "../atoms";
-import { pushOrDeleteItem } from "../utils/general";
+import { useFavoriteLaunchPads } from "../hooks/useFavoriteLaunchPads";
 
 const PAGE_SIZE = 12;
 
@@ -46,16 +44,9 @@ export default function LaunchPads() {
 }
 
 function LaunchPadItem({ launchPad }) {
-  const [favLaunchPads, setFavLaunchPads] = useRecoilState(favLaunchPadsState);
-  const isItemInFavorites = favLaunchPads.includes(launchPad.site_id);
-
-  const onStarClick = () => {
-    const launchPadsNew = pushOrDeleteItem(
-      [...favLaunchPads],
-      launchPad.site_id,
-    );
-    setFavLaunchPads(launchPadsNew);
-  };
+  const { isItemInFavorites, addOrRemoveLaunchPad } = useFavoriteLaunchPads(
+    launchPad.site_id,
+  );
 
   return (
     <Box
@@ -88,7 +79,10 @@ function LaunchPadItem({ launchPad }) {
             {launchPad.successful_launches} succeeded
           </Box>
           <Box d="flex" flexGrow={1} justifyContent="flex-end">
-            <StarButton onStarClick={onStarClick} active={isItemInFavorites} />
+            <StarButton
+              onStarClick={addOrRemoveLaunchPad}
+              active={isItemInFavorites}
+            />
           </Box>
         </Box>
 
