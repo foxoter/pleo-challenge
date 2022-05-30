@@ -1,4 +1,5 @@
 import { SORT_BY_KEYS } from "../constants/rockets";
+import { getMiliseconds } from "./format-date";
 
 export function sortRocketsData(array, sortBy, sortOrder) {
   switch (sortBy) {
@@ -18,7 +19,16 @@ export function sortRocketsData(array, sortBy, sortOrder) {
         : array.sort((a, b) => b.mass.kg - a.mass.kg);
       return array;
     case SORT_BY_KEYS.date:
-      return sortOrder === "asc" ? array : array.reverse();
+      sortOrder === "asc"
+        ? array.sort(
+            (a, b) =>
+              getMiliseconds(a.first_flight) - getMiliseconds(b.first_flight),
+          )
+        : array.sort(
+            (a, b) =>
+              getMiliseconds(b.first_flight) - getMiliseconds(a.first_flight),
+          );
+      return array;
     default:
       return array;
   }

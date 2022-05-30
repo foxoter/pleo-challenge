@@ -59,3 +59,7 @@ export function parseDateObjectValues(timestamp) {
   values[1] = values[1] - 1;
   return values;
 }
+
+export function getMiliseconds(timestamp) {
+  return new Date(timestamp).getTime();
+}
