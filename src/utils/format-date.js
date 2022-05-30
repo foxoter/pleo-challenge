@@ -46,19 +46,29 @@ export function formatLocalTime(timestamp) {
 }
 
 export function parseOffsetString(timestamp) {
+  if (!ISO8601_REGEXP.test(timestamp)) {
+    return "";
+  }
+
   const offset = timestamp.slice(ISO8601_OFFSET_START_INDEX);
   const values = offset.split(/[-+:]/).map(Number);
   return `GMT${offset[0]}${values[1]}${values[2] === 0 ? "" : `:${values[2]}`}`;
 }
 
 export function parseDateObjectValues(timestamp) {
+  if (!ISO8601_REGEXP.test(timestamp)) {
+    return [0];
+  }
+
   const values = timestamp
-    .split(/[:T-]/)
+    .split(/[+:T-]/)
     .map(Number)
     .slice(0, ISO8601_DATE_TIME_SLICE_INDEX);
   values[1] = values[1] - 1;
   return values;
 }
+
+console.log(parseDateObjectValues("2006-03-25T10:30:00+12:00"));
 
 export function getMiliseconds(timestamp) {
   return new Date(timestamp).getTime();
