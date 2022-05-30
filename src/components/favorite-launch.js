@@ -1,5 +1,5 @@
-import { Box, Flex, Spinner, Text, Badge } from "@chakra-ui/core";
 import React from "react";
+import { Box, Flex, Spinner, Text, Badge } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
 import { useSpaceX } from "../utils/use-space-x";
 import Error from "./error";
@@ -74,7 +74,7 @@ export default function FavoriteLaunch({ launchId, onRemove }) {
         </Box>
       </Box>
       <Box position="absolute" bottom="0.5rem" right="0.5rem">
-        <DeleteButton onRemove={onRemove} />
+        <DeleteButton onClick={onRemove} />
       </Box>
     </Box>
   );

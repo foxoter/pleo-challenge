@@ -62,7 +62,7 @@ export default function FavoriteLaunchPad({ launchPadId, onRemove }) {
         </Box>
       </Link>
       <Box position="absolute" bottom="0.5rem" right="0.5rem">
-        <DeleteButton onRemove={onRemove} />
+        <DeleteButton onClick={onRemove} />
       </Box>
     </Box>
   );

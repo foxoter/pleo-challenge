@@ -80,8 +80,8 @@ function LaunchPadItem({ launchPad }) {
           </Box>
           <Box d="flex" flexGrow={1} justifyContent="flex-end">
             <StarButton
-              onStarClick={addOrRemoveLaunchPad}
-              active={isItemInFavorites}
+              onClick={addOrRemoveLaunchPad}
+              isStarred={isItemInFavorites}
             />
           </Box>
         </Box>

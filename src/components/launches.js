@@ -108,8 +108,8 @@ export function LaunchItem({ launch }) {
           </Box>
           <Box d="flex" flexGrow={1} justifyContent="flex-end">
             <StarButton
-              onStarClick={addOrRemoveLaunch}
-              active={isItemInFavorites}
+              onClick={addOrRemoveLaunch}
+              isStarred={isItemInFavorites}
             />
           </Box>
         </Box>

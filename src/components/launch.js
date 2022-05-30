@@ -117,8 +117,8 @@ function Header({ launch }) {
         )}
         <Badge>
           <StarButton
-            onStarClick={addOrRemoveLaunch}
-            active={isItemInFavorites}
+            onClick={addOrRemoveLaunch}
+            isStarred={isItemInFavorites}
           />
         </Badge>
       </Stack>

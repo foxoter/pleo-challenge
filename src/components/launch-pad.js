@@ -113,8 +113,8 @@ function Header({ launchPad }) {
         )}
         <Badge>
           <StarButton
-            onStarClick={addOrRemoveLaunchPad}
-            active={isItemInFavorites}
+            onClick={addOrRemoveLaunchPad}
+            isStarred={isItemInFavorites}
           />
         </Badge>
       </Stack>
