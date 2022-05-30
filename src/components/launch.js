@@ -103,22 +103,37 @@ function Header({ launch }) {
         {launch.mission_name}
       </Heading>
       <Stack isInline spacing="3">
-        <Badge variantColor="purple" fontSize={["xs", "md"]}>
+        <Badge
+          variantColor="purple"
+          fontSize={["xs", "md"]}
+          d="flex"
+          alignItems="center"
+        >
           #{launch.flight_number}
         </Badge>
         {launch.launch_success ? (
-          <Badge variantColor="green" fontSize={["xs", "md"]}>
+          <Badge
+            variantColor="green"
+            fontSize={["xs", "md"]}
+            d="flex"
+            alignItems="center"
+          >
             Successful
           </Badge>
         ) : (
-          <Badge variantColor="red" fontSize={["xs", "md"]}>
+          <Badge
+            variantColor="red"
+            fontSize={["xs", "md"]}
+            d="flex"
+            alignItems="center"
+          >
             Failed
           </Badge>
         )}
         <Badge>
           <StarButton
-            onStarClick={addOrRemoveLaunch}
-            active={isItemInFavorites}
+            onClick={addOrRemoveLaunch}
+            isStarred={isItemInFavorites}
           />
         </Badge>
       </Stack>
@@ -127,7 +142,7 @@ function Header({ launch }) {
 }
 
 function TimeAndLocation({ launch }) {
-  const toolTipProps = {
+  const tooltipProps = {
     hasArrow: true,
     shouldWrapChildren: true,
     placement: "top-start",
@@ -146,7 +161,7 @@ function TimeAndLocation({ launch }) {
           </Box>
         </StatLabel>
         <StatNumber fontSize={["md", "xl"]} as="u">
-          <Tooltip {...toolTipProps}>
+          <Tooltip {...tooltipProps}>
             {formatLocalTime(launch.launch_date_local)}
           </Tooltip>
         </StatNumber>

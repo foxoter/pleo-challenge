@@ -37,6 +37,8 @@ export default function RocketItem({ rocket, higlight }) {
         rounded="lg"
         overflow="hidden"
         position="relative"
+        cursor="pointer"
+        onClick={onOpen}
       >
         <Tooltip placement="bottom" label="View specs" hasArrow>
           <Image
@@ -46,8 +48,6 @@ export default function RocketItem({ rocket, higlight }) {
             width="100%"
             objectFit="cover"
             objectPosition="bottom"
-            cursor="pointer"
-            onClick={onOpen}
           />
         </Tooltip>
         <Box p="6">

@@ -48,8 +48,16 @@ function LaunchPadItem({ launchPad }) {
     launchPad.site_id,
   );
 
+  const handleStarClick = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    addOrRemoveLaunchPad();
+  };
+
   return (
     <Box
+      as={Link}
+      to={`/launch-pads/${launchPad.site_id}`}
       boxShadow="md"
       borderWidth="1px"
       rounded="lg"
@@ -80,26 +88,23 @@ function LaunchPadItem({ launchPad }) {
           </Box>
           <Box d="flex" flexGrow={1} justifyContent="flex-end">
             <StarButton
-              onStarClick={addOrRemoveLaunchPad}
-              active={isItemInFavorites}
+              onClick={handleStarClick}
+              isStarred={isItemInFavorites}
             />
           </Box>
         </Box>
-
-        <Link to={`/launch-pads/${launchPad.site_id}`}>
-          <Box
-            mt="1"
-            fontWeight="semibold"
-            as="h4"
-            lineHeight="tight"
-            isTruncated
-          >
-            {launchPad.name}
-          </Box>
-          <Text color="gray.500" fontSize="sm">
-            {launchPad.vehicles_launched.join(", ")}
-          </Text>
-        </Link>
+        <Box
+          mt="1"
+          fontWeight="semibold"
+          as="h4"
+          lineHeight="tight"
+          isTruncated
+        >
+          {launchPad.name}
+        </Box>
+        <Text color="gray.500" fontSize="sm">
+          {launchPad.vehicles_launched.join(", ")}
+        </Text>
       </Box>
     </Box>
   );

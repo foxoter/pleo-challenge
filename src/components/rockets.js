@@ -40,12 +40,15 @@ export default function Rockets() {
         flexDirection={["column", "row"]}
         m={["2", "6"]}
       >
+        <Text fontWeight="semibold" mb={["2", "0"]}>
+          Sort by:
+        </Text>
         <RadioGroup
           onChange={(e) => setSortBy(e.target.value)}
           value={sortBy}
           isInline
+          ml={["0", "2"]}
         >
-          <Text fontWeight="semibold">Sort by:</Text>
           <Radio value={SORT_BY_KEYS.date}>First launch</Radio>
           <Radio value={SORT_BY_KEYS.cost}>Cost per launch</Radio>
           <Radio value={SORT_BY_KEYS.height}>Height</Radio>

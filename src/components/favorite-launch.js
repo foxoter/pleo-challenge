@@ -1,5 +1,5 @@
-import { Box, Flex, Spinner, Text, Badge } from "@chakra-ui/core";
 import React from "react";
+import { Box, Flex, Spinner, Text, Badge } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
 import { useSpaceX } from "../utils/use-space-x";
 import Error from "./error";
@@ -21,38 +21,39 @@ export default function FavoriteLaunch({ launchId, onRemove }) {
 
   return (
     <Box
+      as={Link}
+      to={`/launches/${launchId.toString()}`}
       boxShadow="md"
       borderWidth="1px"
       rounded="lg"
       overflow="hidden"
       position="relative"
+      display="block"
       data-cy="fav-launch"
     >
-      <Link to={`/launches/${launchId.toString()}`}>
-        <Flex
-          bgImage={`url(${
-            launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
-            launch.links.mission_patch_small
-          })`}
-          bgPos="center"
-          bgSize="cover"
-          bgRepeat="no-repeat"
-          h={100}
-          p={2}
-          alignItems="flex-end"
-          justifyContent="space-between"
-        >
-          {launch.launch_success ? (
-            <Badge variantColor="green" fontSize="sm">
-              Successful
-            </Badge>
-          ) : (
-            <Badge variantColor="red" fontSize="sm">
-              Failed
-            </Badge>
-          )}
-        </Flex>
-      </Link>
+      <Flex
+        bgImage={`url(${
+          launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
+          launch.links.mission_patch_small
+        })`}
+        bgPos="center"
+        bgSize="cover"
+        bgRepeat="no-repeat"
+        h={100}
+        p={2}
+        alignItems="flex-end"
+        justifyContent="space-between"
+      >
+        {launch.launch_success ? (
+          <Badge variantColor="green" fontSize="sm">
+            Successful
+          </Badge>
+        ) : (
+          <Badge variantColor="red" fontSize="sm">
+            Failed
+          </Badge>
+        )}
+      </Flex>
       <Box p="2">
         <Box
           color="gray.500"
@@ -74,7 +75,7 @@ export default function FavoriteLaunch({ launchId, onRemove }) {
         </Box>
       </Box>
       <Box position="absolute" bottom="0.5rem" right="0.5rem">
-        <DeleteButton onRemove={onRemove} />
+        <DeleteButton onClick={onRemove} />
       </Box>
     </Box>
   );
