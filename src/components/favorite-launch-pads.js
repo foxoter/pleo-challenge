@@ -10,13 +10,19 @@ export default function FavoriteLaunchPads() {
     return <Text>You have no favorite launch pads yet</Text>;
   }
 
+  const handleRemove = (e, id) => {
+    e.stopPropagation();
+    e.preventDefault();
+    removeLaunchPad(id);
+  }
+
   return (
     <Stack spacing={4} shouldWrapChildren>
       {favLaunchPadIds.map((id) => (
         <FavoriteLaunchPad
           key={id}
           launchPadId={id}
-          onRemove={() => removeLaunchPad(id)}
+          onRemove={(e) => handleRemove(e, id)}
         />
       ))}
     </Stack>

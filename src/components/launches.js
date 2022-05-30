@@ -52,8 +52,16 @@ export function LaunchItem({ launch }) {
     launch.flight_number,
   );
 
+  const handeStarClick = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    addOrRemoveLaunch();
+  };
+
   return (
     <Box
+      as={Link}
+      to={`/launches/${launch.flight_number.toString()}`}
       boxShadow="md"
       borderWidth="1px"
       rounded="lg"
@@ -61,19 +69,17 @@ export function LaunchItem({ launch }) {
       position="relative"
       data-cy="launch-item"
     >
-      <Link to={`/launches/${launch.flight_number.toString()}`}>
-        <Image
-          src={
-            launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
-            launch.links.mission_patch_small
-          }
-          alt={`${launch.mission_name} launch`}
-          height={["200px", null, "300px"]}
-          width="100%"
-          objectFit="cover"
-          objectPosition="bottom"
-        />
-      </Link>
+      <Image
+        src={
+          launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
+          launch.links.mission_patch_small
+        }
+        alt={`${launch.mission_name} launch`}
+        height={["200px", null, "300px"]}
+        width="100%"
+        objectFit="cover"
+        objectPosition="bottom"
+      />
 
       <Image
         position="absolute"
@@ -108,7 +114,7 @@ export function LaunchItem({ launch }) {
           </Box>
           <Box d="flex" flexGrow={1} justifyContent="flex-end">
             <StarButton
-              onClick={addOrRemoveLaunch}
+              onClick={handeStarClick}
               isStarred={isItemInFavorites}
             />
           </Box>

@@ -21,38 +21,39 @@ export default function FavoriteLaunch({ launchId, onRemove }) {
 
   return (
     <Box
+      as={Link}
+      to={`/launches/${launchId.toString()}`}
       boxShadow="md"
       borderWidth="1px"
       rounded="lg"
       overflow="hidden"
       position="relative"
+      display="block"
       data-cy="fav-launch"
     >
-      <Link to={`/launches/${launchId.toString()}`}>
-        <Flex
-          bgImage={`url(${
-            launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
-            launch.links.mission_patch_small
-          })`}
-          bgPos="center"
-          bgSize="cover"
-          bgRepeat="no-repeat"
-          h={100}
-          p={2}
-          alignItems="flex-end"
-          justifyContent="space-between"
-        >
-          {launch.launch_success ? (
-            <Badge variantColor="green" fontSize="sm">
-              Successful
-            </Badge>
-          ) : (
-            <Badge variantColor="red" fontSize="sm">
-              Failed
-            </Badge>
-          )}
-        </Flex>
-      </Link>
+      <Flex
+        bgImage={`url(${
+          launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
+          launch.links.mission_patch_small
+        })`}
+        bgPos="center"
+        bgSize="cover"
+        bgRepeat="no-repeat"
+        h={100}
+        p={2}
+        alignItems="flex-end"
+        justifyContent="space-between"
+      >
+        {launch.launch_success ? (
+          <Badge variantColor="green" fontSize="sm">
+            Successful
+          </Badge>
+        ) : (
+          <Badge variantColor="red" fontSize="sm">
+            Failed
+          </Badge>
+        )}
+      </Flex>
       <Box p="2">
         <Box
           color="gray.500"

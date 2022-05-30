@@ -11,13 +11,19 @@ export default function FavoriteLaunches() {
     return <Text>You have no favorite launches yet</Text>;
   }
 
+  const handleRemove = (e, id) => {
+    e.stopPropagation();
+    e.preventDefault();
+    removeLaunch(id);
+  };
+
   return (
     <Stack spacing={4} shouldWrapChildren>
       {favLaunchIds.map((id) => (
         <FavoriteLaunch
           key={id}
           launchId={id}
-          onRemove={() => removeLaunch(id)}
+          onRemove={(e) => handleRemove(e, id)}
         />
       ))}
     </Stack>
