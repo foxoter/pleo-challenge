@@ -102,7 +102,7 @@ function Header({ launchPad }) {
           {launchPad.successful_launches}/{launchPad.attempted_launches}{" "}
           successful
         </Badge>
-        {launchPad.stats === "active" ? (
+        {launchPad.status === "active" ? (
           <Badge variantColor="green" fontSize={["sm", "md"]}>
             Active
           </Badge>
