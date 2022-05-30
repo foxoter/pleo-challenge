@@ -2,9 +2,9 @@
 
 # ¡Space·Rockets! app
 
-### [👉 Go to the challenge 👈](./CHALLENGE.md)
-
-### [🚀 See the app in action 🚀](https://spacerockets.netlify.app)
+### [🚀 App in action 🚀](https://pleo-challenge-theta.vercel.app)
+- [Old version link](https://spacerockets.netlify.app)
+- [Task description](./CHALLENGE.md)
 
 ## Develop
 
@@ -13,6 +13,20 @@
 
 - run `yarn` to install dependencies
 - run `yarn start` to start development environment
+
+## Test
+> You'll need [Node](https://nodejs.org/en/) and
+> [Yarn](https://classic.yarnpkg.com/en/) installed
+
+- run `yarn` to install dependencies
+
+### Unit tests
+- run `yarn test` or `yarn test --watchAll` to run unit tests
+
+### Integration tests
+- run `yarn start` to start development environment
+- in a new terminal window run `yarn cypress open` to launch cypress
+- click on available test files
 
 ## Build
 
@@ -46,3 +60,17 @@ All data is fetched from the unofficial SpaceX API V3 at
   ([Feather icons](https://feathericons.com/) wrapper for React)
 - [timeago.js](https://timeago.org/) - Tiny library to display human-readable
   relative time difference
+- [Recoil](https://recoiljs.org/) - lightweight state management library by Facebook Opensource team
+- [Recoil persist](https://www.npmjs.com/package/recoil-persist) - tiny module for recoil to store and sync state to browser Storage
+- [Cypress](https://cypress.io/) — end-to-end testing framework for web test automation
+
+## Potential next steps
+### Code improvement
+- Move all hardcoded strings and routes to constants,
+- Unify colors, margins and paddings with a set of variables,
+- Look into unifying and reusing original Launch and Launch Pad cards,
+- Introduce Typescript.
+
+### Features
+- Enable adding Rockets to Favourites tab,
+- Add calendar feature to display nearest launches in calendar view.
