@@ -68,8 +68,6 @@ export function parseDateObjectValues(timestamp) {
   return values;
 }
 
-console.log(parseDateObjectValues("2006-03-25T10:30:00+12:00"));
-
 export function getMiliseconds(timestamp) {
   return new Date(timestamp).getTime();
 }
