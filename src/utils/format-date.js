@@ -1,4 +1,8 @@
-import { ISO8601_OFFSET_START_INDEX } from "../constants/formate-date";
+import {
+  ISO8601_OFFSET_START_INDEX,
+  ISO8601_REGEXP,
+  ISO8601_DATE_TIME_SLICE_INDEX,
+} from "../constants/formate-date";
 
 export function formatDate(timestamp) {
   return new Intl.DateTimeFormat("en-US", {
@@ -22,9 +26,12 @@ export function formatDateTime(timestamp) {
 }
 
 export function formatLocalTime(timestamp) {
+  if (!ISO8601_REGEXP.test(timestamp)) {
+    return timestamp;
+  }
+
   const offset = parseOffsetString(timestamp);
-  const values = timestamp.split(/[:T-]/).map(Number).slice(0,6);
-  values[1] = values[1] - 1;
+  const dateObjectValues = parseDateObjectValues(timestamp);
 
   const time = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
@@ -33,13 +40,22 @@ export function formatLocalTime(timestamp) {
     hour: "numeric",
     minute: "numeric",
     second: "numeric",
-  }).format(new Date(...values));
-  
+  }).format(new Date(...dateObjectValues));
+
   return `${time} ${offset}`;
 }
 
 export function parseOffsetString(timestamp) {
   const offset = timestamp.slice(ISO8601_OFFSET_START_INDEX);
   const values = offset.split(/[-+:]/).map(Number);
-  return `GMT${offset[0]}${values[1]}${values[2] === 0 ? '' : `:${values[2]}`}`;
+  return `GMT${offset[0]}${values[1]}${values[2] === 0 ? "" : `:${values[2]}`}`;
+}
+
+export function parseDateObjectValues(timestamp) {
+  const values = timestamp
+    .split(/[:T-]/)
+    .map(Number)
+    .slice(0, ISO8601_DATE_TIME_SLICE_INDEX);
+  values[1] = values[1] - 1;
+  return values;
 }

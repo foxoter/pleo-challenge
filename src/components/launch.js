@@ -127,7 +127,7 @@ function Header({ launch }) {
 }
 
 function TimeAndLocation({ launch }) {
-  const toolTipProps = {
+  const tooltipProps = {
     hasArrow: true,
     shouldWrapChildren: true,
     placement: "top-start",
@@ -146,7 +146,7 @@ function TimeAndLocation({ launch }) {
           </Box>
         </StatLabel>
         <StatNumber fontSize={["md", "xl"]} as="u">
-          <Tooltip {...toolTipProps}>
+          <Tooltip {...tooltipProps}>
             {formatLocalTime(launch.launch_date_local)}
           </Tooltip>
         </StatNumber>
