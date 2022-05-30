@@ -103,15 +103,30 @@ function Header({ launch }) {
         {launch.mission_name}
       </Heading>
       <Stack isInline spacing="3">
-        <Badge variantColor="purple" fontSize={["xs", "md"]}>
+        <Badge
+          variantColor="purple"
+          fontSize={["xs", "md"]}
+          d="flex"
+          alignItems="center"
+        >
           #{launch.flight_number}
         </Badge>
         {launch.launch_success ? (
-          <Badge variantColor="green" fontSize={["xs", "md"]}>
+          <Badge
+            variantColor="green"
+            fontSize={["xs", "md"]}
+            d="flex"
+            alignItems="center"
+          >
             Successful
           </Badge>
         ) : (
-          <Badge variantColor="red" fontSize={["xs", "md"]}>
+          <Badge
+            variantColor="red"
+            fontSize={["xs", "md"]}
+            d="flex"
+            alignItems="center"
+          >
             Failed
           </Badge>
         )}
